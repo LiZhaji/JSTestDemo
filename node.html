@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js">
+<!--<![endif]-->
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title></title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="">
+    <style>
+        .st-icon-pandora {
+            font-size: 30px;
+        }
+    </style>
+</head>
+
+<body>
+    <!--[if lt IE 7]>
+      <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
+    <![endif]-->
+    <div class="parent" id="parent">
+        <!-- 注释 -->
+        哈哈哈哈
+        <span id="fspan" class="st-icon-pandora" style="color: red">hello word</span>
+        <p class="pf pf-alipay">一行p的文字</p>
+        <div class="third-child">
+            <p class="pf pf-alipay">div下面的p</p>
+        </div>
+    </div>
+    <script>
+        const parent = document.querySelector("#parent");
+        const fspan = document.querySelector("#fspan")
+        const third = document.getElementsByClassName("third-child")[0]
+
+        // 获取节点测试
+        console.log(third)
+        // console.log('children:', parent.children);
+        // console.log('childNodes:', parent.childNodes);
+        // console.log('firstChild:', parent.firstChild);
+        // console.log('firstElementChild:', parent.firstElementChild);
+
+        // 增删改节点测试
+        let c = document.createComment("js注释");
+        let t = document.createTextNode("js node");
+        let span = document.createElement("span");
+        span.innerHTML = "js新增span";
+        parent.appendChild(c);
+        parent.insertBefore(span, third);
+        // parent.replaceChild(span, document.querySelector("span"))
+
+        // 元素属性操作测试
+        console.log(fspan.getAttribute('id'),fspan.getAttribute('name'))
+        // fspan.setAttribute('style','background: yellow;')
+        // fspan.removeAttribute('class')
+
+        // 获取修改样式测试
+        console.log(fspan.style.color, ' ss ', fspan.style.fontSize, 'ss')
+        fspan.style.fontWeight = 800;
+       // console.log(fspan.currentStyle.color ); //只对IE有用
+        console.log(getComputedStyle(fspan, null),2333 ); 
+
+    </script>
+</body>
+
+</html>
