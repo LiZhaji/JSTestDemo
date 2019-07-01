@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js">
+<!--<![endif]-->
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title></title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      padding: 30px;
+      border: 20px;
+      margin: 10px;
+    }
+
+    .st-icon-pandora {
+      font-size: 30px;
+    }
+
+    .third-child {
+      background: rgb(163, 181, 214);
+      width: 200px;
+      height: 1000px;
+      border: 10px solid rgb(175, 201, 123);
+      padding: 15px;
+      margin: 10px;
+    }
+
+    .parent {
+      position: relative;
+    }
+  </style>
+</head>
+
+<body>
+  <!--[if lt IE 7]>
+      <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
+    <![endif]-->
+  <div class="parent" id="parent">
+    <!-- 注释 -->
+    哈哈哈哈
+    <span id="fspan" class="st-icon-pandora" style="color: red">hello word</span>
+    <p class="pf pf-alipay">一行p的文字</p>
+    <div class="third-child">
+      <p class="pf pf-alipay">div下面的p</p>
+      div下面p外面的文字
+      <span class="pf pf-alipay">aaa</span>
+    </div>
+  </div>
+  <script>
+    const body = document.body;
+    const parent = document.querySelector("#parent");
+    const fspan = document.querySelector("#fspan");
+    const div = document.querySelectorAll("div")[1];
+    const third = document.getElementsByClassName("third-child")[0];
+
+    // 获取节点测试
+    // console.log(third)
+    // console.log('children:', parent.children);
+    // console.log('childNodes:', parent.childNodes);
+    // console.log('firstChild:', parent.firstChild);
+    // console.log('firstElementChild:', parent.firstElementChild);
+
+    // 增删改节点测试
+    let c = document.createComment("js注释");
+    let t = document.createTextNode("js node");
+    let span = document.createElement("span");
+    span.innerHTML = "js新增span";
+    parent.appendChild(c);
+    parent.insertBefore(span, third);
+    // parent.replaceChild(span, document.querySelector("span"))
+
+    // 元素属性操作测试
+    // console.log(fspan.getAttribute('id'), fspan.getAttribute('name'))
+    // fspan.setAttribute('style','background: yellow;')
+    // fspan.removeAttribute('class')
+
+    // 获取修改样式测试
+    // console.log(fspan.style.color, ' ss ', fspan.style.fontSize, 'ss')
+    fspan.style.fontWeight = 800;
+    // console.log(fspan.currentStyle.color ); //只对IE有用
+    let css = getComputedStyle(div, null);
+    // console.log(css.length, Array.isArray(css), 233)
+    // console.log(div.style.color, 2444);
+    let weight = fspan.style.fontWeight
+    // console.log(weight, typeof weight);
+
+    // 可见宽高等测试
+    // console.log('clientWidth:', div.clientHeight, (typeof div.clientWidth)); // 430 number 内容区+内边距
+    // console.log('offsetWidth:', div.offsetHeight); // 450 内容区+内边距+边框
+    // console.log('scrollWidth:', div.scrollHeight); // 可见宽高，clientWidth
+    // console.log('offsetParent:', div.offsetParent); // body
+    // console.log('offsetTop:', div.offsetTop); // 92
+    // console.log('offsetLeft:', div.offsetLeft); // 10
+    // console.log('availWidth:', window.screen.availWidth); // 10
+
+    // 内容测试
+    // console.log(fspan.innerHTML);
+    // console.log(div.innerHTML);
+    // console.log(div.innerText);
+    div.innerHTML = 'aaasas';
+
+    // function f() {
+    //     console.log('I am outside!');
+    // }
+    // (function () {
+    //     if (true) {
+    //         // 重复声明一次函数f
+    //         function f() {
+    //             console.log('I am inside!');
+    //         }
+    //     }
+    //     this.f();
+    // })();
+
+    // 鼠标事件测试
+    // div.addEventListener('mousemove',() => console.log('mouse is moving !'))
+    // div.addEventListener('mouseenter',() => console.log('mouse enter !'))
+    // div.addEventListener('mouseleave',() => console.log('mouse leave !'))
+    // div.addEventListener('mousedown',(event) => console.log('mouse is down !', 
+    // '\nclient:', event.clientY,
+    // '\noffset:', event.offsetY,
+    // '\npage:', event.pageY,
+    // '\nmovement:', event.movementY,
+    // '\nscreen:', event.screenY))
+    // div.addEventListener('mouseup',() => console.log('mouse is up !'))
+
+    // 键盘事件
+    document.addEventListener('keypress', (event) => {
+      console.log('keypress', event.keyCode)
+    });
+    document.addEventListener('keydown', (event) => {
+      console.log('keydown:', event.keyCode)
+    });
+    document.addEventListener('keyup', (event) => {
+      console.log('keyup:', event.keyCode)
+    });
+
+    // 滚轮事件
+    // document.addEventListener('mousewheel', (event) => console.log('scroll:', event.wheelDelta, typeof event
+    //     .wheelDelta))
+
+
+    // 数组和对象的引用
+    // (function testArr() {
+    //   var list = [{
+    //     a: 1,
+    //     b: 2
+    //   }, {
+    //     a: 54,
+    //     b: 89
+    //   }];
+    //   let res1 = [];
+    //   let arr = {};
+    //   list.forEach(el => {
+    //     arr = {};
+    //     arr.a = el.a;
+    //     arr.b = el.b;
+    //     res1.push(arr);
+    //   })
+    //   console.log(res1, 222)
+    // })()
+
+    (function proxy() {
+      var people = {
+        name: 'zhaji',
+        age: 20,
+        score: 59
+      };
+      var pxy = new Proxy(people, {
+        get: function (target, property, receiver) {
+          return {
+            obj: target,
+            property: property,
+            receiver: receiver
+          }
+        },
+        set: function (target, prop, value, receiver) {
+          if (prop === 'age') {
+            target[prop] = value;
+          } else {
+            throw new Error('error!')
+          }
+        },
+        has(target, key) {
+          if (target[key]) {
+            console.log('it is!')
+            return true;
+          } else {
+            console.log('no!')
+            return false;
+          }
+        }
+      })
+      // console.log(pxy.name.receiver); // Proxy {name: "zhaji", age: 20}
+      // console.log(pxy.name.receiver === pxy); // true
+      // console.log(people.name); // zhaji
+      // pxy.a = 20; // test.html:186 Uncaught Error: error!
+
+      console.log('age in people:', 'age' in people);// age in people: true
+      console.log('age in pxy:', 'age' in pxy);// it is! age in pxy: true
+      console.log('sex in pxy:', 'sex' in pxy);// no! sex in pxy: false
+      // console.log('has age:', pxy.hasProperty('age'));  // 无此function
+      // console.log('has sex:', pxy.hasProperty('sex')); // 无此function
+      // console.log('ownhas age:', pxy.hasOwnProperty('age'));// 无此function...
+      // console.log('ownhas sex:', pxy.hasOwnProperty('sex'));// 无此function...
+      // for (let key in people) {
+      //   console.log(people[key]);
+      // }
+
+
+      var pxy1 = new Proxy(function () {
+        console.log('proxy terget')
+      }, {
+        apply(target, ctx, args) {
+          return {
+            target: target,
+            ctx: ctx,
+            args: args
+          }
+          return this;
+        },
+        construct(target, args, newTarget){
+          // 只能返回对象
+          return {target: target, args: args, newTarget: newTarget};
+        }
+      })
+      var bind1 = pxy1.bind(this);
+      console.log(pxy1(20, 30));
+      console.log(bind1(30, 30));
+      console.log(new pxy1('a', 'b'))
+
+    })()
+  </script>
+</body>
+
+</html>
