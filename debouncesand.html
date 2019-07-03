@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js">
+<!--<![endif]-->
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title></title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="">
+</head>
+
+<body>
+  <!--[if lt IE 7]>
+      <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
+    <![endif]-->
+  <div>
+    <button id="debounce">debounce</button>
+  </div>
+  <div>
+    <button id="throttling">throttling</button>
+  </div>
+  <script>
+    // 防抖函数
+    function debounce(handle, time) {
+      var timer;
+      return function () {
+        // 每次点击都会重置延时调用
+        clearTimeout(timer);
+        timer = setTimeout(
+          handle, time);
+      }
+    }
+    document.querySelector("#debounce").addEventListener('click', debounce(() => alert('debounced!'), 2000))
+
+    // 节流函数
+    function throttling(handle, time) {
+      var lock = false;
+      return function () {
+        if (lock) {
+          return
+        }
+        lock = true;
+        handle();
+        setTimeout(() => {
+          lock = false;
+        }, time);
+      }
+    }
+    document.querySelector("#throttling").
+    addEventListener('click', throttling(() => console.log('throttling!'), 1000))
+
+    // thunk函数 /curry?
+    function thunk(fn, args = []) {
+      var length = fn.length // 表示fn的参数个数
+      return function () {
+        var newArg = [...args, ...arguments];
+        if (newArg.length < length) {
+          return thunk(fn, newArg)
+        } else {
+          return fn.apply(this, newArg)
+        }
+      }
+    }
+
+    function multiply(a, b, c) {
+      console.log('m:', a * b * c);
+      return (a* b *c);
+    }
+    // 正常用法
+    // multiply(2, 3, 4);
+
+    // 单参用法
+    let thunkMtp = thunk(multiply);
+    thunkMtp(2)(3)(4);
+    thunkMtp(2, 3)(4);
+
+    function uplaod() {
+      try {
+        list = [1, 2, 3, 4]
+        let promise = Promise.resolve();
+        list.reduce((promise, el) => {
+          return promise.then((result) => {
+            console.log(el);
+            if (el === 3) {
+              throw new Error('error!!!');
+            }
+          })
+        }, promise)
+      } catch (err) {
+        console.log(err, 9999)
+      };
+    }
+  </script>
+</body>
+
+</html>

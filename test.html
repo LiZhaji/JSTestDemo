@@ -29,7 +29,7 @@
       font-size: 30px;
     }
 
-    .third-child {
+    /* .third-child {
       background: rgb(163, 181, 214);
       width: 200px;
       height: 1000px;
@@ -40,7 +40,7 @@
 
     .parent {
       position: relative;
-    }
+    } */
   </style>
 </head>
 
@@ -59,7 +59,47 @@
       <span class="pf pf-alipay">aaa</span>
     </div>
   </div>
+  <div><button id="debounce">debounce</button></div>
+  <div><button id="throttling">throttle</button></div>
+  <div><button id="nothing">nothing</button></div>
+  <div>
+    <input type="file" name="" id="file">
+    <button id="upfile">uploadFile</button>
+  </div>
+
   <script>
+    // 获取图片
+    document.querySelector("#upfile").addEventListener('click', uploadFile)
+    document.querySelector("#file").addEventListener('change', getFiles)
+    var files = [];
+    var id = 0;
+
+    function getFiles(params) {
+      const file = event.target.files[0];
+      files.push({
+        file: file,
+        id: id++
+      });
+
+      console.log(files)
+    };
+
+    function uploadFile() {
+
+      console.log(files)
+      let fm = new FormData();
+      files.forEach(el => {
+        fm.append(el.id, el.file);
+        console.log(fm.get(el.id))
+      })
+      let upData = JSON.stringify(files)
+      console.log(upData, 666)
+      let xhr = new XMLHttpRequest;
+      xhr.open('post', 'https://re.csdn.net/csdnbi');
+      xhr.send(upData);
+    }
+
+
     const body = document.body;
     const parent = document.querySelector("#parent");
     const fspan = document.querySelector("#fspan");
@@ -79,7 +119,8 @@
     let span = document.createElement("span");
     span.innerHTML = "js新增span";
     parent.appendChild(c);
-    parent.insertBefore(span, third);
+    parent
+      .insertBefore(span, third);
     // parent.replaceChild(span, document.querySelector("span"))
 
     // 元素属性操作测试
@@ -209,9 +250,9 @@
       // console.log(people.name); // zhaji
       // pxy.a = 20; // test.html:186 Uncaught Error: error!
 
-      console.log('age in people:', 'age' in people);// age in people: true
-      console.log('age in pxy:', 'age' in pxy);// it is! age in pxy: true
-      console.log('sex in pxy:', 'sex' in pxy);// no! sex in pxy: false
+      console.log('age in people:', 'age' in people); // age in people: true
+      console.log('age in pxy:', 'age' in pxy); // it is! age in pxy: true
+      console.log('sex in pxy:', 'sex' in pxy); // no! sex in pxy: false
       // console.log('has age:', pxy.hasProperty('age'));  // 无此function
       // console.log('has sex:', pxy.hasProperty('sex')); // 无此function
       // console.log('ownhas age:', pxy.hasOwnProperty('age'));// 无此function...
@@ -221,6 +262,7 @@
       // }
 
 
+      // proxy代理
       var pxy1 = new Proxy(function () {
         console.log('proxy terget')
       }, {
@@ -232,17 +274,64 @@
           }
           return this;
         },
-        construct(target, args, newTarget){
+        construct(target, args, newTarget) {
           // 只能返回对象
-          return {target: target, args: args, newTarget: newTarget};
+          return {
+            target: target,
+            args: args,
+            newTarget: newTarget
+          };
         }
       })
       var bind1 = pxy1.bind(this);
       console.log(pxy1(20, 30));
       console.log(bind1(30, 30));
       console.log(new pxy1('a', 'b'))
-
     })()
+
+    // generator函数
+
+    // 无参函数
+    function nothing(a) {
+      return function () {
+        alert('nothing~')
+      }
+    }
+    document.querySelector("#nothing").addEventListener('click', nothing('what'))
+
+    // 防抖函数
+    function debounce(handle, time) {
+      var timer;
+      console.log('aaaaaa');
+      return function () {
+        clearTimeout(timer);
+        console.log('timer:', timer)
+        timer = setTimeout(() => {
+          handle();
+        }, time);
+      }
+    }
+    document.querySelector("#debounce").addEventListener('click', debounce(() => alert('debounce~', 2000)))
+
+    // 节流函数
+    function throttling(handle, time) {
+      var lock = false;
+      return function () {
+        // 锁定时，不做任何操作
+        if (lock) {
+          return;
+        }
+        lock = true;
+        handle();
+        setTimeout(() => {
+          lock = false;
+        }, time);
+      
+       
+      }
+      
+    }
+    document.querySelector("#throttling").addEventListener('click', throttling(() => alert('throttling~', 2000)))
   </script>
 </body>
 
