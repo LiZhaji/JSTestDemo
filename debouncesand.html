@@ -36,7 +36,19 @@
           handle, time);
       }
     }
-    document.querySelector("#debounce").addEventListener('click', debounce(() => alert('debounced!'), 2000))
+
+    function debounce1(handle, time) {
+      let timer; // 定时器
+      return function () {
+        // 执行到这表示点击了，需要清除定时器并重新开始
+        clearTimeout(timer);
+        timer = setTimeout(() => {
+          // 执行到这里表示time时间内无事发生
+          handle();
+        }, time)
+      }
+    }
+    document.querySelector("#debounce").addEventListener('click', debounce1(() => alert('debounced!'), 2000))
 
     // 节流函数
     function throttling(handle, time) {
@@ -52,8 +64,58 @@
         }, time);
       }
     }
+
+    function throttle(handle, time) {
+      let lock = false;
+      return function () {
+        if (lock) {
+          return;
+        }
+        lock = true;
+        // handle();
+        setTimeout(() => {
+          // 如果处理函数写在这里，表示每段时间的末尾执行该函数
+          handle();
+          lock = false;
+        }, time)
+      }
+    }
+
+    function throttle3(handle, time) {
+      let timer ,a = 'aaa';
+
+      return function () {
+        if (!timer) {
+          handle();
+          timer = setTimeout(() => {
+            timer = null;
+          }, time);
+        }
+      }
+    }
+
+    function throttle4(handle, time) {
+      let lock, start;
+      return function () {
+        if (!lock) {
+          start = Date.now();
+        }
+        lock = true;
+        let end = Date.now();
+        if (end - start >= time) {
+          handle();
+          lock = false;
+        }
+
+
+
+      }
+    }
+    function handle(params) {
+      console.log('throttling!', params)
+    }
     document.querySelector("#throttling").
-    addEventListener('click', throttling(() => console.log('throttling!'), 1000))
+    addEventListener('click', throttle4(handle, 1000)
 
     // thunk函数 /curry?
     function thunk(fn, args = []) {
@@ -70,7 +132,7 @@
 
     function multiply(a, b, c) {
       console.log('m:', a * b * c);
-      return (a* b *c);
+      return (a * b * c);
     }
     // 正常用法
     // multiply(2, 3, 4);

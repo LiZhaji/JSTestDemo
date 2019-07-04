@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js">
+<!--<![endif]-->
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title></title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="">
+</head>
+
+<body>
+  <!--[if lt IE 7]>
+      <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
+    <![endif]-->
+
+  <script>
+    // es5构造函数
+    // this指向实例, new.target 指向构造函数
+    function People(name, age) {
+      try {
+        if (new.target !== People) {
+          throw new Error('use new/Reflect.construct() to create people');
+        }
+      } catch (error) {
+        console.error(error);
+      }
+      this.name = name;
+      this.age = age;
+      console.log(this);
+    }
+    People.prototype.commonDream = ('中国梦');
+    People.prototype.achieveDream = function () {
+      console.log(this.name, '实现中国梦');
+    }
+    let oldzhaji = new People('oldzhaji', 21);
+    let oldfei = new People('oldfei', 24);
+    console.log(oldzhaji.name, oldzhaji.commonDream);
+    oldzhaji.achieveDream();
+    console.log(oldfei.name, oldfei.commonDream);
+    oldfei.achieveDream();
+    console.log(oldfei.constructor === oldzhaji.constructor, oldzhaji.constructor);
+
+    let oldzhangsan = People('zhangsan', 30)
+
+    // 类
+    let person = class Person {
+      // this指向实例, new.target指向类  
+      constructor(name, age) {
+        console.log('new.target === Person : ', new.target === Person);
+        this.name = name;
+        this.age = age;
+      }
+      get sex() {
+        return 'getsex';
+      }
+      set sex(val) {
+        console.log('set sex', val);
+      }
+      static classOwnMethond(){
+        console.log('class own methods run');
+      }
+      classOwnMethond(){
+        console.log('persons methods run');
+      }
+    }
+    let zhaji = new person('zhaji', 21);
+    zhaji.sex = 'female';
+    console.log(zhaji.name, zhaji.sex, zhaji.address);
+    // zhaji.name = zhajia;
+    try{
+      person.classOwnMethond();
+      // Person.classOwnMethond();
+      zhaji.classOwnMethond();
+    }catch(err){
+      console.error(err);
+    }
+  </script>
+</body>
+
+</html>
