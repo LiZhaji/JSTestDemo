@@ -1,0 +1,710 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js">
+<!--<![endif]-->
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title></title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="">
+  <style>
+    .clearfix:before,
+    .clearfix:after {
+      content: '';
+      display: block;
+      clear: both;
+    }
+
+    .claerfix {
+      zoom: 1;
+    }
+
+    .layout {
+      min-width: 1280px;
+      top: 105px;
+      background: #f5f5f5;
+      /* overflow: hidden; */
+      zoom: 1;
+    }
+
+    .container {
+      width: 1280px;
+      margin: 0 auto;
+      position: relative;
+      zoom: 1;
+    }
+
+    .main-content {
+      background: white;
+      padding: 30px 30px 0 30px;
+    }
+
+    .file-info,
+    .business-list-info {
+      float: left;
+      min-height: 750px;
+      border: 1px solid #f9f8f8;
+      border-bottom: none;
+      box-sizing: border-box;
+    }
+
+    .file-info {
+      width: 70%;
+    }
+
+    .business-list-info {
+      width: 30%;
+      position: relative;
+    }
+
+    .title {
+      height: 20px;
+      padding: 10px 20px;
+      font-size: 14px;
+      font-weight: bold;
+      background: #d2d2d2;
+      text-align: left;
+    }
+
+    .for-center {
+      text-align: center;
+      line-height: 400px;
+    }
+
+    .upload-outer {
+      display: inline-block;
+      vertical-align: middle;
+      line-height: 2;
+    }
+
+    .input-outer {
+      position: relative;
+      display: inline-block;
+      overflow: hidden;
+    }
+
+    .input-outer span {
+      font-size: 20px;
+    }
+
+    .tip {
+      font-size: 12px;
+      color: gray;
+      margin: 0 0 15px 0;
+    }
+
+    .file-list>table {
+      border: 1px solid rgb(189, 189, 189);
+      font-weight: normal;
+      font-size: 14px;
+      text-align: left;
+
+    }
+
+    .file-list>table>thead th {
+      background: #e4e4e4;
+      color: #333;
+      padding: 0 5px;
+      border: 1px solid rgb(211, 211, 211);
+
+    }
+
+    .file-list>table>tbody td {
+      padding: 5px;
+      border: 1px solid lightgray;
+    }
+
+    .del-file {
+      cursor: pointer;
+    }
+
+    .buttons {
+      position: absolute;
+      padding: 10px;
+      bottom: 0;
+      background: #f5f5f5;
+      width: 100%;
+      box-sizing: border-box;
+    }
+
+    #up-print-btn {
+      float: right;
+      cursor: pointer;
+      margin-right: 15px;
+    }
+
+    #up-print-btn>span {
+      display: inline-block;
+    }
+
+    .form-vertical {
+      padding: 10px 20px;
+    }
+
+    .form-vertical .controls {
+      padding-left: 0
+    }
+
+    .form-vertical .control-group {
+      margin-left: 0;
+      margin-right: 0;
+    }
+
+    .form-vertical .iptW384 input {
+      box-sizing: border-box;
+      width: 100% !important;
+      height: 38px;
+      border: none;
+      border: 1px solid #b2b2b2;
+      border-radius: 2px;
+    }
+
+    .form-vertical .iptW384 textarea {
+      box-sizing: border-box;
+      width: 100% !important;
+      border: none;
+      border: 1px solid #b2b2b2;
+      border-radius: 2px;
+    }
+
+    .form-vertical select {
+      box-sizing: border-box;
+      width: 100%;
+      height: 38px;
+      border: none;
+      border: 1px solid #b2b2b2;
+      border-radius: 2px;
+    }
+
+    .form-vertical .credential select {
+      box-sizing: border-box;
+      height: 38px;
+      border: none;
+      border: 1px solid #b2b2b2;
+      border-radius: 2px;
+      float: left;
+      border-top-right-radius: 0;
+      border-bottom-right-radius: 0;
+    }
+
+    .form-vertical .credential input {
+      box-sizing: border-box;
+      width: 100%;
+      margin-top: 15px;
+      height: 38px;
+      border: none;
+      border: 1px solid #b2b2b2;
+      border-radius: 2px;
+      border-top-left-radius: 0;
+      border-bottom-left-radius: 0;
+    }
+
+    .form-vertical .iptW384 input:focus,
+    .form-vertical .iptW384 textarea:focus,
+    .form-vertical .credential input:focus {
+      border-color: #4c4c4c;
+      box-shadow: none
+    }
+
+    .form-vertical .control-label {
+      font-size: 14px;
+      color: #565656;
+      letter-spacing: 0;
+      line-height: 20px;
+      font-weight: 400;
+    }
+
+    .breadLine {
+      padding: 0 20px;
+      box-sizing: border-box;
+      height: 28px;
+      line-height: 28px;
+      font-size: 12px;
+      border-bottom: 1px solid #EEE;
+      background: #FFF;
+    }
+
+    ul.breadcrumbs {
+      position: relative;
+      z-index: 990;
+      *zoom: 1;
+    }
+
+    ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    ul.breadcrumbs li {
+      float: left;
+      padding-left: 15px;
+      font-size: 12px;
+      font-weight: bold;
+      color: #333;
+      height: 28px;
+    }
+
+    ul.breadcrumbs li a {
+      text-decoration: none;
+      padding: 3px 20px 3px 0;
+      display: inline-block;
+      *display: inline;
+      *zoom: 1;
+      background: url(../images/sprite.png) right -249px;
+      color: #2546A5;
+      height: 22px;
+      line-height: 22px;
+      font-weight: normal;
+    }
+
+    .buttonM {
+      line-height: 20px;
+      padding: 5px 30px;
+      font-size: 14px;
+      background: transparent url(../images/repeat.png) repeat-x -9999px -9999px;
+      border: none;
+      border-bottom: 2px solid transparent;
+      font-size: 12px;
+      color: #333;
+      font-weight: normal;
+      text-align: center;
+      display: inline-block;
+      *display: inline;
+      *zoom: 1;
+      line-height: 18px;
+      border-radius: 2px;
+      vertical-align: middle;
+    }
+
+    .bBlue {
+      border-color: #15366D !important;
+      background-color: #3C7CD5;
+
+    }
+
+    .buttonM.disabled {
+      color: #a8a8a8 !important;
+      border: 1px solid #d8d8d8 !important;
+      background: #f1f1f1;
+      box-shadow: none;
+      opacity: 1;
+      -webkit-filter: grayscale(100%);
+    }
+
+    #header {
+      top: 0;
+      background: #3F85E4;
+      width: 100%;
+      filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#3F85E4', endColorstr='#3F85E4', GradientType=0);
+      position: relative;
+      width: 100%;
+
+    }
+
+    .navbar-header {
+      position: relative;
+    }
+
+    .navbarHeaderImg {
+      position: absolute;
+      height: 48px;
+      width: 48px;
+      left: 10px;
+      top: 7px;
+    }
+
+    .navbarBrand {
+      /* max-width: 400px; */
+      /* width: 400px; */
+      width: 291px;
+      display: inline-block;
+      height: 58px;
+      padding-left: 60px;
+      color: #fff;
+      font-size: 20px;
+      line-height: 58px;
+      letter-spacing: 2px;
+      font-family: 'Microsoft Yahei';
+      font-weight: 700;
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.6);
+      float: left;
+    }
+
+    .navbarRight li a {
+      font-size: 16px;
+    }
+
+    .navBtn a {
+      color: #fff;
+    }
+
+    /* .navBtn.active{
+  background: #3874c7
+} */
+    .navbarTop {
+      height: 30px;
+      padding: 0;
+      margin-top: 15px;
+      float: right;
+      font-size: 16px;
+      color: white;
+    }
+
+    .navbarTop li {
+      float: left;
+      margin-right: 5px;
+      height: 30px;
+      line-height: 30px;
+      cursor: pointer;
+    }
+
+    .navbarTop li.link:hover {
+      background: #3874c7;
+    }
+
+    .navbarTop li.link.active {
+      background: #3874c7;
+    }
+
+    .navbarTop li.link a {
+      color: white;
+      padding: 0 20px;
+    }
+
+    .sys {
+      padding: 0;
+      margin-right: 20px;
+      color: white;
+    }
+
+    .navbarTop li.sys {
+      padding: 0;
+      margin-right: 20px;
+      color: white;
+    }
+
+    .navbarTop li.sys span {
+      font-size: 14px;
+    }
+
+    .navbarTop li.sys span i {
+      font-style: normal;
+      margin-left: 22px;
+    }
+
+    .dropmove .sysUnusual {
+      display: none;
+      background: white;
+      box-shadow: none;
+      height: auto;
+      width: 100px;
+    }
+
+    .dropmove:hover .sysUnusual {
+      top: 30px;
+      left: -38px;
+    }
+
+    .userIcon {
+      background: url("/images/collect/user.png") no-repeat;
+    }
+
+    .downloadInfo {
+      display: none;
+      background: white;
+
+      box-shadow: none;
+      height: auto;
+      width: 270px;
+      top: 50px;
+      border: solid 1px #3F85E4;
+      border-radius: 6px;
+      cursor: default;
+      z-index: 999;
+      overflow: visible;
+    }
+
+    .mainInfo {
+      width: 250px;
+      margin: 10px;
+      margin-bottom: 0;
+      overflow: hidden;
+    }
+
+    .rowInfo {
+      width: 100%;
+      height: 55px;
+      color: black;
+      font-size: 14px;
+      border-bottom: dashed 1px #ccc;
+      overflow: hidden;
+    }
+
+    .lastRow {
+      border-bottom: 0;
+    }
+
+    .mainDes {
+      ;
+      margin-top: 7px;
+      height: 20px;
+      line-height: 20px;
+      padding: 0;
+      float: left;
+    }
+
+    .mainDes a {
+      color: black;
+    }
+
+    .subDes {
+      height: 25px;
+      line-height: 25px;
+      padding: 0;
+      color: #999;
+      font-size: 12px;
+      float: left;
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      width: 200px;
+    }
+
+    .downImg {
+      float: left;
+      margin-top: 10px;
+      margin-right: 10px;
+    }
+
+    .lastDec {
+      margin-top: 18px;
+    }
+
+    .iconArrow {
+      margin-left: 60px;
+      z-index: 1000;
+      cursor: pointer;
+      position: inherit;
+      /* _border-color: tomato;
+  _filter: chroma(color=tomato);
+  _border-bottom-color: #3F85E4; */
+    }
+
+    .arrowSpan {
+      display: block;
+      width: 0;
+      height: 0;
+      border-width: 0 20px 20px;
+      border-style: solid;
+      border-color: transparent transparent white;
+      /*榛� 閫忔槑 閫忔槑 */
+      position: absolute;
+      top: 1px;
+      left: -20px;
+      /* _border-color: tomato;
+  _filter: chroma(color=tomato);
+  _border-bottom-color: white; */
+    }
+
+    .stateTitle {
+      width: 100%;
+      height: 30px;
+      line-height: 30px;
+      vertical-align: middle;
+      background: #E44949;
+      color: white;
+      text-indent: 1em
+    }
+
+    .stateInfo {
+      margin: 10px 0 10px 30px;
+    }
+
+    li.sys span {
+      padding-left: 26px;
+    }
+
+    .dropdownIcon {
+      width: 270px;
+      height: 9px;
+      position: absolute;
+      top: 42px;
+      z-index: 1000;
+      display: none;
+    }
+  </style>
+</head>
+
+<body>
+  <!--[if lt IE 7]>
+      <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
+    <![endif]-->
+  <div id="wrapper">
+    <div id="header" class="layout">
+      <div class="container">
+        <div class="navbar-header clearfix" id="navbar-header">
+          <img src="/images/logo_main.png" alt="" id="logoImg" class="navbarHeaderImg" />
+          <a class="navbarBrand" id="logotitle" title="理财风险管理系统">理财风险管理系统</a>
+          <ul class="navbarTop">
+            <li class="link" id="datacollect"><a href="/web/webDevice/datacollect/index.action">首页</a></li>
+            <li class="link" id="busiRelate"><a href="/webdevice/contact/toOpenPageBusiRelate.action">业务单</a></li>
+            <li class="sys" style="margin-right:0">|</li>
+            <li class="link" id="logSearch" style="margin-right: 0"><a
+                href="/webdevice/log/toOpenPageLog.action">app名称</a></li>
+            <li class="sys" style="margin-right:0">|</li>
+            <li class="sys" id="top_name"
+              style="margin-left:20px;cursor:default;margin-right:0;width: 80px;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;">
+              <span class='userIcon' title="user2">user2</span></li>
+
+            <li class="sys" id="pwdID"><span class="oprChange">修改密码</span></li>
+            <li class="sys"><span class="oprExit" id="logout">退出</span></li>
+
+          </ul>
+
+        </div>
+      </div>
+    </div>
+    <div class="dropdown downloadInfo">
+      <div class="mainInfo">
+        <div class="rowInfo lastRow">
+          <a class="downImg downLoadExe">
+            <img src="/images/collect/vs2008.png" alt="">
+          </a>
+          <p class="mainDes"><a class="downLoadExe">理财上传客户端</a></p>
+          <p class="subDes">用于上传本地usb理财录像文件</p>
+        </div>
+      </div>
+    </div>
+    <div id="content" class="layout" style="top:60px; min-height:830px;">
+      <div class="container wrapper grid-s9m0" id="content-inner">
+        <!--面包屑-->
+        <div class="breadLine">
+          <ul class="breadcrumbs">
+            <li><a href="#">首页</a></li>
+            <li><a href="/webDevice/datacollect/index.action">文件上传</a></li>
+            <li><a href="/webdevice/fileupload/toOpenFileuploadOrder.action">填写业务单</a></li>
+            <li>文件上传</li>
+            <li id="up-print-btn"><span class="ico i-print"></span>打印</li>
+          </ul>
+        </div>
+        <div class="main-content clearfix">
+          <!-- 文件信息 -->
+          <div class="file-info">
+            <div class="title"><span class="text">文件信息</span></div>
+            <div class="for-center">
+              <div class="upload-outer">
+                <div class="input-outer" id="uploader">
+                  <span id="picker"><span class="ico i-download"></span>上传</span>
+                </div>
+                <div class="tip">选择视频文件上传，摁下ctrl进行多选</div>
+                <div class="file-list">
+                  <table>
+                    <thead>
+                      <tr>
+                        <th style="width: 300px;">文件名称</th>
+                        <th style="width: 100px;">操作</th>
+                      </tr>
+                    </thead>
+                    <tbody id="fileList"></tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- 业务单信息 -->
+          <div class="business-list-info">
+            <div class="title"><span class="text">业务单信息</span></div>
+            <form class="form-vertical">
+              <fieldset class="noLegend">
+                <div class="control-group">
+                  <label class="control-label">业务单号</label>
+                  <div class="controls iptW384"><span
+                      style="font-size: 14px;color: #4c4c4c;letter-spacing: 0;line-height: 20px;">2019052715171776085</span>
+                  </div>
+                </div>
+                <div class="control-group">
+                  <label class="control-label">业务类型<em>*</em></label>
+                  <div class="control-group">
+                    <select name="user.level" style="font-size: 14px">
+                      <option value="10" style="height: 38px!important">10</option>
+                      <option value="20">20</option>
+                      <option value="30">30</option>
+                      <option value="40">40</option>
+                      <option value="50" selected="selected">50</option>
+                      <option value="60">60</option>
+                      <option value="70">70</option>
+                      <option value="80">80</option>
+                      <option value="90">90</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="control-group">
+                  <label class="control-label">客户姓名<em>*</em></label>
+                  <div class="controls iptW384"><input type="text"></div>
+                </div>
+                <div class="control-group">
+                  <label class="control-label">证件<em>*</em></label>
+                  <div class="controls credential">
+                    <select name="user.level" style="font-size: 14px;">
+                      <option value="10" style="height: 38px!important">10</option>
+                      <option value="20">20</option>
+                      <option value="30">30</option>
+                      <option value="40">40</option>
+                      <option value="50" selected="selected">50</option>
+                    </select><input type="text">
+                  </div>
+                </div>
+                <div class="control-group">
+                  <label class="control-label">备注<em>*</em></label>
+                  <div class="controls iptW384">
+                    <textarea maxlength="200" name="user.desc" value="" class="auto-input" type="text"
+                      rows="5"></textarea>
+                  </div>
+                </div>
+              </fieldset>
+            </form>
+            <!-- 提交打印按钮组 -->
+            <div class="buttons">
+              <a class="buttonM bBlue" id="ctlBtn" href="#">提交</a>
+              <a class="buttonM disabled" id="printBtn" href="#"><span class="ico i-print"></span>打印</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="" async defer></script>
+</body>
+
+</html>
+<!-- 
+  问题： 按钮组.buttons右边有一个白块
+
+  解决1：按钮组宽度由100% 改为120%
+  新问题：当页面宽度变小出现横滚动条时，整个页面不是100%了，右边会多出空白
+
+  解决2：去掉.main-content的padding-right，加在右边盒子.business-list-info上
+  新问题：右边盒子的border-right在padding外了
+
+  解决3：右边盒子的padding-right 改成 margin-right
+  新问题：左右盒子是百分比的宽度，一行容不下变成两行了
+
+  解决4：右边盒子margin-right + width由30%变为29%
+  新问题：1% 肯定不能刚好是30px, 多出来的部分是白色的main-content
+
+  解决5：把右边盒子内分成上下两部分，上面设置30px,下面不设置
+  新问题：在哪儿设置30px都会出现它们的问题
+
+  解决6：去掉右边盒子的border-top和borer-right，新增一个div充当边框，绝对定位，宽度为1px，top和bottom设置高度
+  新问题：在出现横滚动条时，ie下该充当边框的div不可见，只有不出现横滚动条才有效
+ -->
