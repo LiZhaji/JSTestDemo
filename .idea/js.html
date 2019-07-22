@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js">
+<!--<![endif]-->
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title></title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="">
+</head>
+
+<body>
+  <!--[if lt IE 7]>
+      <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
+    <![endif]-->
+  <script>
+    // 1.回掉函数参数有多少，就自动传入多少
+    [1, 2, 3].map(parseInt);
+    [1, 2, 3].map((el) => {
+      return parseInt(el)
+    });
+    [1, 2, 3].map((el, i) => {
+      return parseInt(el, i)
+    });
+    [1, 2, 3].map(handle1);
+
+    function handle1(a, b, c, d) {
+      console.log(a, b, c, d);
+    }
+
+    // 2.[].执行reduce、find等方法会报错,
+    // 但是.length返回0，可以遍历
+    try {
+      [].reduce(Math.pow());
+    } catch (error) {
+      console.error("error1:", error);
+
+    }
+
+    // 3.运算符优先级
+    /* 优先级高低：
+     () 
+     a++ a-- 
+     ! ~ +a -a ++a --a
+     * / %
+     + -
+     >> << >>> 
+     < <= > >= in instanceof
+     == != === !==
+     && || ?:
+     = += -= ... 赋值运算符
+     ...展开
+     */
+    var val = 'smtg';
+    console.log('Value is ' + (val === 'smtg') ? 'Something' : 'Nothing'); // Something
+
+    // TODO
+    // 4.typeof 可以变量提升？
+    var name = 'World!';
+    (function () {
+      if (typeof name === 'undefined') {
+        var name = 'Jack';
+        console.log('Goodbye ' + name);
+      } else {
+        console.log('Hello ' + name);
+      }
+    })(); // Goodbye Jack
+
+    // TODO
+    // 5.最大整数
+    // js最大安全整数：2^53
+    var END = Math.pow(2, 53);
+    var START = END - 100;
+    var count = 0;
+    // for (var i = START; i <= END; i++) {
+    //   count++;
+    // }
+    console.log(count); // 无限循环
+
+    // 6. a = new String('a') 创建一个对象 a == 'a': true; a === 'a': false;
+    // b = String('b') 创建一个字符串 b === 'b';
+    
+  </script>
+  <script src="" async defer></script>
+</body>
+
+</html>
